@@ -40,21 +40,25 @@ var Dog = function (info) {
 //define function and creating empty object for user define
   var info = info || {};
   this.color = info.color;
-  this.status = info.stats || 'alive';
-  //terinary short hand for if statements
+  this.status = info.status || 'alive';
+  //terinary short hand for if statements, do not just make it false...only make it false if it's not defined by terinary conditions
   this.hungry = (info.hungry === undefined) ? true : info.hungry;
 };
 
-//new variable to pass into new 
-
+//new variable to pass into new instances
 var Human = function (info) {
   var info = info || {};
+//if not define will give it this string or can be a a true or false...just note true or false don't need '' quotes  
   this.cool = info.cool || 'lame';
+/*pet is the call id locater to find its function and running it...in this case, it hunts down the variable status...which 
+is already define on top as this.status = info.staus || 'alive'. it will replaces the value or mutatating it to the new condition as "happy"
+from the previous as "alive"
+*/
   this.pet = function(pet) {
   pet.status = 'happy';
   };
   this.feed = function(feed) {
-  feed.hungry = "Now he's fat";  
+  feed.hungry = "Now he's fat, thanks allot";  
   };
 };
 // END ANSWERS
@@ -64,12 +68,14 @@ var Human = function (info) {
 //  / __  / __ \/ __ `/ ___/
 // / /_/ / /_/ / /_/ (__  ) 
 // \__,_/\____/\__, /____/  
-//            /____/        
+//            /____/ 
+//new instance for dog, which is defined as sadie, same example as person then new instance of new is PersonA, PersonB etc...       
 var sadie = new Dog({
   color: "blue",
+//the last conditions don't need a comma?
   hungry: false
 });
-
+//don't forget to always have ({objects paramenter}), you don't need ":" inside the object paramter, just add "," for each, except for the last one
 var moonshine = new Dog({
   color: "blue-red"
 });
@@ -81,7 +87,7 @@ var atticus = new Dog();
 //  / / / / /_/ / / / / / / /_/ / / / (__  ) 
 // /_/ /_/\__,_/_/ /_/ /_/\__,_/_/ /_/____/  
 var mason = new Human();
-
+var thach = new Human();
 var julia = new Human({
   cool: true
 });
@@ -111,7 +117,7 @@ it("should be make Moonshine hungry and Sadie not hungry", function(){
 
 it("should make Moonshine no longer hungry when you feed him", function(){
   julia.feed(moonshine);
-  expect(moonshine.hungry).toBe("Now he's fat");
+  expect(moonshine.hungry).toBe("Now he's fat, thanks allot");
 });
 
 
